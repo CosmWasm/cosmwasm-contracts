@@ -14,7 +14,7 @@ use staking::msg::{
 };
 
 // This line will test the output of cargo wasm
-static WASM: &[u8] = include_bytes!("../../../target/wasm32-unknown-unknown/release/staking.wasm");
+static WASM: &[u8] = include_bytes!("../../../binaries/staking.wasm");
 // You can uncomment this line instead to test productionified build from cosmwasm-opt
 // static WASM: &[u8] = include_bytes!("../contract.wasm");
 

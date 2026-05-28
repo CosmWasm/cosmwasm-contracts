@@ -9,7 +9,7 @@ use burner::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg};
 use cosmwasm_vm::Storage;
 
 // This line will test the output of cargo wasm
-static WASM: &[u8] = include_bytes!("../../../target/wasm32-unknown-unknown/release/burner.wasm");
+static WASM: &[u8] = include_bytes!("../../../binaries/burner.wasm");
 // You can uncomment this line instead to test productionified build from rust-optimizer
 // static WASM: &[u8] = include_bytes!("../contract.wasm");
 

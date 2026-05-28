@@ -21,8 +21,7 @@ use ibc_reflect_send::ibc_msg::{AcknowledgementMsg, PacketMsg, WhoAmIResponse};
 use ibc_reflect_send::msg::{AccountResponse, AdminResponse, ExecuteMsg, InstantiateMsg, QueryMsg};
 
 // This line will test the output of cargo wasm
-static WASM: &[u8] =
-    include_bytes!("../../../target/wasm32-unknown-unknown/release/ibc_reflect_send.wasm");
+static WASM: &[u8] = include_bytes!("../../../binaries/ibc_reflect_send.wasm");
 
 const CREATOR: &str = "creator";
 

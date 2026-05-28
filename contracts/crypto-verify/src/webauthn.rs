@@ -31,7 +31,8 @@ pub fn verify(
     let signature = Signature::from_scalars(
         GenericArray::from_slice(r).into_0_14(),
         GenericArray::from_slice(s).into_0_14(),
-    ).unwrap();
+    )
+    .unwrap();
 
     // This is missing some checks of some bit flags
     if authenticator_data.len() < 37 {
