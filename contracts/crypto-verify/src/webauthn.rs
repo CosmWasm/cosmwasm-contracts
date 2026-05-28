@@ -2,8 +2,9 @@
 
 use base64::{engine::general_purpose::URL_SAFE_NO_PAD, Engine};
 use cosmwasm_std::{Api, StdResult};
+use generic_array::GenericArray;
 use p256::{ecdsa::Signature, elliptic_curve::sec1::FromEncodedPoint, EncodedPoint, PublicKey};
-use sha2::{digest::generic_array::GenericArray, Digest, Sha256};
+use sha2::{Digest, Sha256};
 
 #[allow(clippy::too_many_arguments)]
 pub fn verify(
@@ -28,10 +29,9 @@ pub fn verify(
     let point = EncodedPoint::from_affine_coordinates(x.into(), y.into(), false);
     let public_key = PublicKey::from_encoded_point(&point).unwrap();
     let signature = Signature::from_scalars(
-        GenericArray::clone_from_slice(r),
-        GenericArray::clone_from_slice(s),
-    )
-    .unwrap();
+        GenericArray::from_slice(r).into_0_14(),
+        GenericArray::from_slice(s).into_0_14(),
+    ).unwrap();
 
     // This is missing some checks of some bit flags
     if authenticator_data.len() < 37 {

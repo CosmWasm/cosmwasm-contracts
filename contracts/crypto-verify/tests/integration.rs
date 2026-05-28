@@ -14,7 +14,8 @@ use sha2::{Digest, Sha256};
 use crypto_verify::msg::{InstantiateMsg, ListVerificationsResponse, QueryMsg, VerifyResponse};
 
 // Output of cargo wasm
-static WASM: &[u8] = include_bytes!("../target/wasm32-unknown-unknown/release/crypto_verify.wasm");
+static WASM: &[u8] =
+    include_bytes!("../../../target/wasm32-unknown-unknown/release/crypto_verify.wasm");
 
 const CREATOR: &str = "creator";
 

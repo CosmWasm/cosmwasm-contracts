@@ -18,7 +18,7 @@ use cosmwasm_vm::{
 use hackatom::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg, QueryMsg, SudoMsg};
 use hackatom::state::{State, CONFIG_KEY};
 
-static WASM: &[u8] = include_bytes!("../target/wasm32-unknown-unknown/release/hackatom.wasm");
+static WASM: &[u8] = include_bytes!("../../../target/wasm32-unknown-unknown/release/hackatom.wasm");
 
 const DESERIALIZATION_LIMIT: usize = 20_000;
 
