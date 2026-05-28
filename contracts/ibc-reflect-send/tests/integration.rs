@@ -22,7 +22,7 @@ use ibc_reflect_send::msg::{AccountResponse, AdminResponse, ExecuteMsg, Instanti
 
 // This line will test the output of cargo wasm
 static WASM: &[u8] =
-    include_bytes!("../target/wasm32-unknown-unknown/release/ibc_reflect_send.wasm");
+    include_bytes!("../../../target/wasm32-unknown-unknown/release/ibc_reflect_send.wasm");
 
 const CREATOR: &str = "creator";
 

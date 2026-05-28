@@ -17,7 +17,7 @@ use queue::msg::{
 };
 use queue::state::Item;
 
-static WASM: &[u8] = include_bytes!("../target/wasm32-unknown-unknown/release/queue.wasm");
+static WASM: &[u8] = include_bytes!("../../../target/wasm32-unknown-unknown/release/queue.wasm");
 
 /// Instantiates a contract with no elements
 fn create_contract() -> (Instance<MockApi, MockStorage, MockQuerier>, MessageInfo) {

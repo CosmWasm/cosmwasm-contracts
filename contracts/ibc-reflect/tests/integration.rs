@@ -23,7 +23,7 @@ use ibc_reflect::msg::{
 };
 
 // This line will test the output of cargo wasm
-static WASM: &[u8] = include_bytes!("../target/wasm32-unknown-unknown/release/ibc_reflect.wasm");
+static WASM: &[u8] = include_bytes!("../../../target/wasm32-unknown-unknown/release/ibc_reflect.wasm");
 
 const CREATOR: &str = "creator";
 // code id of the reflect contract
