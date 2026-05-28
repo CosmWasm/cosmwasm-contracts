@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "./devtools/confirm-proceed.sh"
+
 set -o errexit -o nounset -o pipefail
 
 msg() {
@@ -43,6 +45,13 @@ contracts_nightly=(
 
 toolchain_stable=1.95.0
 toolchain_nightly=nightly-2026-02-28
+
+if confirm_proceed; then
+    echo "Updating schemas..."
+else
+    echo "Aborted updating schemas."
+    exit 0
+fi
 
 for dir in "${contracts_stable[@]}"; do
   check_contract "$dir" "$toolchain_stable"

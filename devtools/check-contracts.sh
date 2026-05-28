@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "./devtools/confirm-proceed.sh"
+
 set -o errexit -o nounset -o pipefail
 
 if [[ "${1:-}" == "parallel" ]]; then
@@ -78,6 +80,13 @@ toolchain_nightly=nightly-2026-02-28
 
 rustflags_stable=""
 rustflags_nightly="-C target-feature=+nontrapping-fptoint"
+
+if confirm_proceed; then
+    echo "Checking contracts..."
+else
+    echo "Aborted checking contracts."
+    exit 0
+fi
 
 if (( parallel )); then
   for dir in "${contracts_stable[@]}"; do
