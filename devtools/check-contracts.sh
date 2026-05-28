@@ -25,23 +25,23 @@ check_contract() {
     cd "$contract_dir" || exit 1
 
     msg "CHECK FORMATTING" "$contract"
-#    cargo +"$2" fmt -- --check
+    cargo +"$2" fmt -- --check
 
     msg "RUN UNIT TESTS" "$contract"
-    cargo +"$2" test --lib
+    cargo +"$2" test --lib --locked
 
     msg "BUILD WASM" "$contract"
-    RUSTFLAGS="$3" cargo +"$2" build --release --lib --target wasm32-unknown-unknown
+    RUSTFLAGS="$3" cargo +"$2" build --release --lib --locked --target wasm32-unknown-unknown
     cp "$wasm_src" "$wasm_dst"
 
     msg "RUN LINTER" "$contract"
-    cargo +"$2" clippy --all-targets --tests -- -D warnings
+    cargo +"$2" clippy --all-targets --tests --locked -- -D warnings
 
     msg "RUN INTEGRATION TESTS" "$contract"
-    cargo +"$2" test --test integration
+    cargo +"$2" test --test integration --locked
 
     msg "GENERATE SCHEMA" "$contract"
-    cargo +"$2" run --bin schema
+    cargo +"$2" run --bin schema --locked
 
     msg "ENSURE SCHEMA IS UP-TO-DATE" "$contract"
     git diff --quiet ./schema
