@@ -22,6 +22,7 @@ check_contract() {
     contract="$(basename "$contract_dir" | tr - _)"
     wasm_src="../../target/wasm32-unknown-unknown/release/$contract.wasm"
     wasm_dst="../../binaries/$contract.wasm"
+    wat_dst="../../binaries/$contract.wat"
 
     msg "CHANGE DIRECTORY" "$contract_dir"
     cd "$contract_dir" || exit 1
@@ -30,20 +31,25 @@ check_contract() {
     cargo +"$2" fmt -- --check
 
     msg "RUN UNIT TESTS" "$contract"
-    cargo +"$2" test --lib --locked
+    cargo +"$2" test --lib
 
     msg "BUILD WASM" "$contract"
-    RUSTFLAGS="$3" cargo +"$2" build --release --lib --locked --target wasm32-unknown-unknown
+    RUSTFLAGS="$3" cargo +"$2" build --release --lib --target wasm32-unknown-unknown
+
+    msg "COPY WASM" "$contract"
     cp "$wasm_src" "$wasm_dst"
 
+    msg "GENERATE WAT" "$contract"
+    wasm2wat "$wasm_dst" -o "$wat_dst"
+
     msg "RUN LINTER" "$contract"
-    cargo +"$2" clippy --all-targets --tests --locked -- -D warnings
+    cargo +"$2" clippy --all-targets --tests -- -D warnings
 
     msg "RUN INTEGRATION TESTS" "$contract"
-    cargo +"$2" test --test integration --locked
+    cargo +"$2" test --test integration
 
     msg "GENERATE SCHEMA" "$contract"
-    cargo +"$2" run --bin schema --locked
+    cargo +"$2" run --bin schema
 
     msg "ENSURE SCHEMA IS UP-TO-DATE" "$contract"
     git diff --quiet ./schema

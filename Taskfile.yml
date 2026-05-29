@@ -21,7 +21,7 @@ tasks:
   clean:
     desc: Removes all compiled artifacts
     cmds:
-      - task: clean
+      - cmd: cargo {{.TOOLCHAIN}} clean
       - cmd: ./devtools/clean-contracts.sh
 
   fmt:
